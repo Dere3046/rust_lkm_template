@@ -19,7 +19,7 @@ android14-5.15 android14-6.1 android15-6.6 android16-6.12
 rust_support outputs are cached at:
 
 ```sh
-${RUST_SUPPORT_CACHE:-$HOME/.cache/rust-lkm-sdk}/rust_support/<rev>/<target>
+${RUST_SUPPORT_CACHE:-.cache}/rust_support/<rev>/<target>
 ```
 
 Delete the cache entry to force a rust_support rebuild.

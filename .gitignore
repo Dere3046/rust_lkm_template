@@ -1,4 +1,5 @@
 .sdk/
+.cache/
 deps/
 out/
 test/

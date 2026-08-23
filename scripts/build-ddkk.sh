@@ -9,7 +9,7 @@ RUST_IMAGE=docker.cnb.cool/ylarod/ddk/ddk-min:android16-6.12
 KDIR=/opt/ddk/kdir/${TARGET}
 RUST_KDIR=/opt/ddk/kdir/android16-6.12
 RUST_SUPPORT_DIR="$ROOT/deps/rust_support"
-CACHE=${RUST_SUPPORT_CACHE:-$HOME/.cache/rust-lkm-sdk}
+CACHE=${RUST_SUPPORT_CACHE:-$ROOT/.cache}
 REV=$(awk '$1=="rust_support" {print $2; exit}' "$ROOT/deps.lst")
 CACHE_DIR="$CACHE/rust_support/$REV/$TARGET"
 OUT="$ROOT/out/$TARGET"
