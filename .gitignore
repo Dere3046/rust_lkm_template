@@ -1,0 +1,15 @@
+.sdk/
+deps/
+out/
+test/
+*.ko
+*.o
+*.mod
+*.mod.c
+*.cmd
+*.symversions
+Module.symvers
+modules.order
+*.rmeta
+*.so
+src/exports_rust_generated.h
