@@ -66,6 +66,17 @@ docker run --rm \
 			--redefine-sym init_module=rust_mymod_init_module \
 			--redefine-sym cleanup_module=rust_mymod_cleanup_module \
 			"$OUT/mymod_rust.o"
+		ALIAS_MAP=/cache/rust_support/$RUST_REV/'"$TARGET"'/rust_sym_map.txt
+		if [ -f "$ALIAS_MAP" ]; then
+			echo "== apply rust_support short aliases =="
+			args=""
+			while read -r long short; do
+				[ -z "$long" ] && continue
+				args="$args --redefine-sym $long=$short"
+			done < "$ALIAS_MAP"
+			# shellcheck disable=SC2086
+			llvm-objcopy $args "$OUT/mymod_rust.o"
+		fi
 		touch "$OUT/.mymod_rust.o.cmd"
 	'
 
