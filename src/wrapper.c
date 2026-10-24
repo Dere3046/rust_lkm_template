@@ -9,20 +9,20 @@
 extern int rust_mymod_init_module(void);
 extern void rust_mymod_cleanup_module(void);
 
-int __init init_module(void)
+/*
+ * the rust object renames its init_module/cleanup_module symbols, so the
+ * entry points are declared here and module_init/module_exit alias them,
+ * which emits the cfi jump table entry the right way for the kernel at hand
+ */
+static int __init rustmod_init(void)
 {
 	return rust_mymod_init_module();
 }
 
-void __exit cleanup_module(void)
+static void __exit rustmod_exit(void)
 {
 	rust_mymod_cleanup_module();
 }
 
-/*
- * old CFI needs __cfi_jt_* jump table entries
- * module_init/module_exit macros emit them
- * manual wrapper must add them
- */
-__CFI_ADDRESSABLE(init_module, __initdata);
-__CFI_ADDRESSABLE(cleanup_module, __exitdata);
+module_init(rustmod_init);
+module_exit(rustmod_exit);
